@@ -2,10 +2,6 @@ package main
 
 import (
 	"embed"
-	"github.com/gin-contrib/sessions"
-	"github.com/gin-contrib/sessions/cookie"
-	"github.com/gin-contrib/sessions/redis"
-	"github.com/gin-gonic/gin"
 	"log"
 	"message-pusher/channel"
 	"message-pusher/common"
@@ -13,6 +9,11 @@ import (
 	"message-pusher/router"
 	"os"
 	"strconv"
+
+	"github.com/gin-contrib/sessions"
+	"github.com/gin-contrib/sessions/cookie"
+	"github.com/gin-contrib/sessions/redis"
+	"github.com/gin-gonic/gin"
 )
 
 //go:embed web/build

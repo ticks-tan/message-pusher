@@ -1,10 +1,9 @@
-FROM node:16 as builder
+FROM node:20 as builder
 
 WORKDIR /build
 COPY ./web .
-COPY ./VERSION .
-RUN npm install
-RUN REACT_APP_VERSION=$(cat VERSION) npm run build
+RUN pnpm install
+RUN pnpm run build
 
 FROM golang AS builder2
 
@@ -16,7 +15,7 @@ WORKDIR /build
 COPY . .
 COPY --from=builder /build/build ./web/build
 RUN go mod download
-RUN go build -ldflags "-s -w -X 'message-pusher/common.Version=$(cat VERSION)' -extldflags '-static'" -o message-pusher
+RUN go build -ldflags "-s -w -extldflags '-static'" -o message-pusher
 
 FROM alpine
 
